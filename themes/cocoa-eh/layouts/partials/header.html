@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+
+{{ partial "head.html" . }}
+
+<body lang="{{ .Site.Params.lang }}">
+
+
+<section class="header header-home"> 
+    <div class="container">
+        <a href="{{ .Site.BaseURL }}"><img class="logo" src="{{ .Site.Params.logofile | absURL }}" /></a>
+        <div class="content">
+            <a href="{{ .Site.BaseURL }}">
+                <div class="name">
+		    <h2><!-- // -->{{ .Site.Params.description }}</h2>
+                    <h1>{{ .Site.Title }}</h1>
+                </div>
+            </a>
+            <nav>
+                <ul>
+                    {{ if ne (len (where .Site.RegularPages "Section" "blog")) 0 }}
+                        <a href="{{ .Site.BaseURL }}blog/"><li>Blog</li></a>
+                    {{ end }}
+                    {{ range .Site.Sections }}
+                        {{ range first 1 (where .Pages "Section" "ne" "")}}
+                            {{ if ne .Section "blog"}}
+                            <a href="{{ .Section | urlize }}"><li>{{ .Section }}</li></a>
+                            {{ end }}
+                        {{ end }}
+                    {{ end }}
+                    {{ range where .Site.RegularPages "Section" ""}}
+                        {{ if and (ne .Title "Home") (ne .Params.hidden true)}}
+                            <a href="{{ .Permalink }}"><li>{{ .Title }}</li></a>
+                        {{ end }}
+                    {{ end }}
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+</section>
+
+{{ if .IsHome }}
+<section class="icons icons-home">
+{{ else }}
+<section class="icons icons-page">
+{{ end }}
+    <div class="container">
+        <div class="content">
+
+        {{ if .Site.Params.github }}
+            <a href="https://github.com/{{ .Site.Params.github }}" target="_blank">
+                <i class="icon larger ion-social-github"></i>
+            </a>
+        {{ end }}
+        
+        {{ if .Site.Params.twitter }}
+            <a href="https://twitter.com/{{ .Site.Params.twitter }}" target="_blank">
+                <i class="icon larger ion-social-twitter"></i>
+            </a>
+        {{ end }}
+
+        {{ if .Site.Params.facebook }}
+            <a href="https://www.facebook.com/{{ .Site.Params.facebook }}" target="_blank">
+                <i class="icon larger ion-social-facebook"></i>
+            </a>
+        {{ end }}
+
+        {{ if .Site.Params.linkedin }}
+            <a href="https://www.linkedin.com/in/{{ .Site.Params.linkedin }}" target="_blank">
+                <i class="icon larger ion-social-linkedin"></i>
+            </a>
+        {{ end }}
+
+        {{ if .Site.Params.email }}
+            <a href="mailto:{{ .Site.Params.email }}">
+                <i class="icon ion-ios-email larger"></i>
+            </a>
+        {{ end }}
+
+        {{ if .Site.RSSLink }}
+            <a href="{{ .Site.RSSLink }}">
+                <i class="icon ion-social-rss larger"></i>
+            </a>
+        {{ end }}
+        </div>
+    </div>
+</section>

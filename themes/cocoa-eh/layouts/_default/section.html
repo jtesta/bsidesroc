@@ -1,0 +1,40 @@
+{{ partial "header.html" . }}
+{{ $globalTitle := .Title}}
+
+{{ if ne (len (where .Data.Pages "Title" "!=" $globalTitle)) 0}}
+<section class="subnav">
+    <div class="container">
+        <div class="content">
+            {{ partial "page-heading.html" . }}
+            <nav id="subnav-nav">
+                ┗
+                <ul>
+                    {{ range .Data.Pages.ByPublishDate }}
+                        {{ if ne .Title $globalTitle }}
+                            {{ partial "li.html" . }}
+                        {{ end }}
+                    {{ end }}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+{{ end }}
+
+<section class="main">
+    <div class="container">
+        <div class="content">
+            {{ if eq (len (where .Data.Pages "Title" "!=" $globalTitle)) 0}}
+                {{ partial "page-heading.html" . }}
+            {{ end }}
+            <div class="markdown">
+                {{ range .Data.Pages }}
+                    {{ if eq .Title $globalTitle }}
+                        {{ .Content }}
+                    {{ end }}
+                {{ end }}
+            </div>
+        </div>
+    </div>
+</section>
+{{ partial "footer.html" . }}

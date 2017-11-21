@@ -1,0 +1,33 @@
+{{ partial "header.html" . }}
+{{ if .IsHome }}
+<section class="main main-home">
+{{ else }}
+<section class="main">
+{{ end }}
+    <div class="container">
+        <div class="content">
+            {{ range where .Data.Pages "Title" "Home"}}
+                <div class="markdown">
+                {{ .Content }}
+                </div>
+            {{ end }}
+
+            <h3>Recent Updates</h3>
+
+            <ul>
+            {{ range first 5 (.Data.Pages.GroupByDate "Jan, 2006" "desc")}}
+                {{ range where .Pages.ByPublishDate "Section" "blog"}}
+                    {{ partial "li.html" . }}
+                {{ end }}
+            {{ end }}
+            </ul>
+
+            {{ $nbTotalGroup := len (.Data.Pages.GroupByDate "Jan, 2006" "desc")}}
+            {{ if gt $nbTotalGroup 5}}
+                <a href="./blog/" class="see-more">See more ...</a>
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{ partial "footer.html" . }}
+
