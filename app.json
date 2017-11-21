@@ -1,0 +1,23 @@
+{
+  "name": "bsidesroc",
+  "scripts": {
+  },
+  "env": {
+    "BUILDPACK_URL": {
+      "required": true
+    },
+    "HUGO_VERSION": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/roperzh/heroku-buildpack-hugo.git"
+    }
+  ]
+}
