@@ -1,7 +1,6 @@
 {
   "name": "bsidesroc",
   "scripts": {
-      "postdeploy":"printenv"
   },
   "env": {
     "BUILDPACK_URL": {
