@@ -1,7 +1,7 @@
 {
   "name": "bsidesroc",
   "scripts": {
-      "postdeploy":"printenv && heroku info -s ; heroku info -s bsidesroc-production"
+      "postdeploy":"printenv"
   },
   "env": {
     "BUILDPACK_URL": {
