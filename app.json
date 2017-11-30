@@ -1,6 +1,7 @@
 {
   "name": "bsidesroc",
   "scripts": {
+      "postdeploy":"printenv"
   },
   "env": {
     "BUILDPACK_URL": {
@@ -8,7 +9,13 @@
     },
     "HUGO_VERSION": {
       "required": true
-    }
+    },
+	"HEROKU_APP_NAME": {
+		"required": true
+	},
+	"HEROKU_PARENT_APP_NAME": {
+		"required": true
+	}
   },
   "formation": {
   },
